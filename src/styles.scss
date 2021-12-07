@@ -1,1 +1,86 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Philosopher', sans-serif;
+    font-size: 1rem;
+}
+
+.btn {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &_success {
+        background-color: hsl(120, 40%, 50%);
+        color: white;
+
+        &:hover {
+            background-color: hsl(120, 40%, 40%);
+        }
+
+        &:focus {
+            outline: 3px solid hsl(120, 40%, 80%);
+        }
+    }
+
+    &_danger {
+        background-color: hsl(0, 70%, 50%);
+        color: white;
+
+        &:hover {
+            background-color: hsl(0, 100%, 35%);
+        }
+
+        &:focus {
+            outline: 3px solid hsl(0, 100%, 85%);
+        }
+    }
+
+    &_warning {
+        background-color: hsl(50, 90%, 50%);
+
+        &:hover {
+            background-color: hsl(50, 90%, 40%);
+            color: white;
+        }
+
+        &:focus {
+            outline: 3px solid hsl(50, 90%, 75%);
+        }
+    }
+
+    &_primary {
+        background-color: hsl(220, 100%, 65%);
+        color: white;
+
+        &:hover {
+            background-color: hsl(220, 100%, 55%);
+        }
+
+        &:disabled {
+            background-color: hsl(220, 100%, 80%);
+            cursor: not-allowed;
+        }
+
+        &:focus {
+            outline: 3px solid hsl(220, 100%, 85%);
+        }
+    }
+}
+
+input[type='text'] {
+    padding: 5px 15px;
+    border: none;
+    outline: none;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+
+    &:focus {
+        outline: 3px solid #B6DAFF;
+    }
+}

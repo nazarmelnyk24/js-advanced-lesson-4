@@ -1,0 +1,134 @@
+<div class="phonebook">
+    <h1 class="phonebook__title">My phone book!</h1>
+    <form class="phonebook__form">
+        <input 
+            type="text"
+            name='searchfield'
+            placeholder="search text goes here"
+            [(ngModel)]="searchfield"
+        >
+        <input 
+            class="btn btn_success" 
+            type="button" 
+            value="Add Phone"
+            (click)="btnAdd()"
+        >
+    </form>
+    <table class="phonebook__table">
+        <thead>
+            <th (click)="sortOrderFName()">
+                First Name
+                <fa-icon 
+                    [icon]="faCaretUp"
+                    *ngIf="caretUpFName"
+                ></fa-icon>
+                <fa-icon 
+                    [icon]="faCaretDown"
+                    *ngIf="caretDownFName"
+                ></fa-icon>
+            </th>
+            <th (click)="sortOrderLName()">
+                Last Name
+                <fa-icon 
+                    [icon]="faCaretUp"
+                    *ngIf="caretUpLName"
+                ></fa-icon>
+                <fa-icon 
+                    [icon]="faCaretDown"
+                    *ngIf="caretDownLName"
+                ></fa-icon>
+            </th>
+            <th (click)="sortOrderNumber()">
+                Number
+                <fa-icon 
+                    [icon]="faCaretUp"
+                    *ngIf="caretUpNumber"
+                ></fa-icon>
+                <fa-icon 
+                    [icon]="faCaretDown"
+                    *ngIf="caretDownNumber"
+                ></fa-icon>
+            </th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let person of people | search: searchfield | sort: sortFName | sortlname: sortLName | sortnumber: sortNumber">
+                <td>{{person.fname}}</td>
+                <td>{{person.lname}}</td>
+                <td>{{person.number}}</td>
+                <td>
+                    <button
+                        class="btn btn_warning"
+                        (click)="btnEdit(person.id)"
+                        >Edit
+                    </button>
+                </td>
+                <td>
+                    <button
+                        class="btn btn_danger"
+                        (click)="btnDelete(person.id)"
+                        >Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<div 
+    class="phonebook__modal-background" 
+    *ngIf="isShowModal" 
+    @openClose
+    >
+    <form class="phonebook__modal">
+            <div class="phonebook__modal-title">
+                <span>Add phone</span>
+                <span
+                    class="phonebook__modal-close-btn"
+                    (click)="isShowModal = false; resetForm()"
+                    >
+                    <fa-icon [icon]="faTimes"></fa-icon>
+                </span>
+            </div>
+            <input
+                type="text"
+                name="fname"
+                placeholder="first name goes here"
+                maxlength="20"
+                [(ngModel)]="fnameEdit"
+            >
+            <input
+                type="text"
+                name="lname"
+                placeholder="second name goes here"
+                maxlength="20"
+                [(ngModel)]="lnameEdit"
+            >
+            <input
+                type="text"
+                name="number"
+                placeholder="phone number goes here"
+                maxlength="15"
+                [(ngModel)]="numberEdit"
+            >
+            <input
+                class="btn btn_primary"
+                type="button"
+                value="Add"
+                *ngIf="isShowAddBtn"
+                (click)="btnSave(fnameEdit, lnameEdit, numberEdit)"
+                [disabled]='formFilled(fnameEdit, lnameEdit, numberEdit)'
+            >
+            <input
+                class="btn btn_primary"
+                type="button"
+                value="Edit"
+                *ngIf="isShowEditBtn"
+                (click)="btnSaveEdit(fnameEdit, lnameEdit, numberEdit)"
+                [disabled]='formFilled(fnameEdit, lnameEdit, numberEdit)'
+            >
+        </form>
+</div>
